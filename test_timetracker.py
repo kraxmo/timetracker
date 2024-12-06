@@ -14,13 +14,16 @@ class TestMain(unittest.TestCase):
             self.assertEqual(int(seconds), 3)
 
     def test_3_seconds_formatted(self):
-        self.timer.split()
-        timevalue = self.timer.elapsed_time_formatted
+        timevalue = self.timer.split()
         with self.subTest(timevalue=timevalue):
             self.assertEqual(timevalue, "00:00:03.000")
 
 # # Example Usage
 # timer = ProcessTimer()
 # timer.start()
+#
+# # Print split time
+# print(timer.split())
+#
 # # Perform some process here...
 # timer.stop()
