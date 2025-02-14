@@ -12,31 +12,12 @@ class TimeTracker:
     def __init__(self) -> None:
         self.restart()
 
-    def calculate_elapsed_time(self) -> None:
-        """
-            A method that calculates elapsed from start and stop times
-            
-            :Example:
-            >>> restart()
-        """
-        if self.start_time is None:
-            raise ValueError("Timer has not been started.")
-
-        if self.stop_time is None:
-            raise ValueError("Timer has not been stopped.")
-
-        self.elapsed_time: float = self.stop_time - self.start_time
-        total_seconds: float = self.elapsed_time
-        self.hours, remainder = divmod(total_seconds, 3600)
-        self.minutes, self.seconds = divmod(remainder, 60)
-        self.milliseconds: float = (self.seconds - int(self.seconds)) * 1000
-
     def restart(self) -> None:
         """
             A method that explicitly starts/restarts the timer
             
             :Example:
-            >>> restart()
+            >>> timer.restart()
         """
         self.start_time: float = time.perf_counter()
         self.stop_time = None
@@ -47,18 +28,22 @@ class TimeTracker:
             A method that stops the timer and calculates elapsed time
             
             :Example:
-            >>> stop()
+            >>> timer.stop()
         """
         assert self.start_time is not None, "Timer has not been started."
         self.stop_time: float = time.perf_counter()
-        self.calculate_elapsed_time()
+        self.elapsed_time: float = self.stop_time - self.start_time
+        total_seconds: float = self.elapsed_time
+        self.hours, remainder = divmod(total_seconds, 3600)
+        self.minutes, self.seconds = divmod(remainder, 60)
+        self.milliseconds: float = (self.seconds - int(self.seconds)) * 1000
 
     def split(self) -> str:
         """
             A method that returns a formatted split time
             
             :Example:
-            >>> split()
+            >>> timer.split()
             00:00:03.00
             
             :returns: The formatted elapsed time.
