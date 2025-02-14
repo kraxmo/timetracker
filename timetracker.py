@@ -9,8 +9,7 @@ class TimeTracker:
         :Example:
         >>> timer = TimeTracker()
     """
-
-    def __init__(self):
+    def __init__(self) -> None:
         self.restart()
 
     def calculate_elapsed_time(self) -> None:
