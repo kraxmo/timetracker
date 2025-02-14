@@ -11,16 +11,15 @@ class TimeTracker:
     """
 
     def __init__(self):
-        self.start()
+        self.restart()
 
     def calculate_elapsed_time(self) -> None:
         """
             A method that calculates elapsed from start and stop times
             
             :Example:
-            >>> start()
+            >>> restart()
         """
-
         if self.start_time is None:
             raise ValueError("Timer has not been started.")
 
@@ -33,14 +32,13 @@ class TimeTracker:
         self.minutes, self.seconds = divmod(remainder, 60)
         self.milliseconds: float = (self.seconds - int(self.seconds)) * 1000
 
-    def start(self) -> None:
+    def restart(self) -> None:
         """
-            A method that explicitly starts the timer
+            A method that explicitly starts/restarts the timer
             
             :Example:
-            >>> start()
+            >>> restart()
         """
-
         self.start_time: float = time.perf_counter()
         self.stop_time = None
         self.elapsed_time = None
@@ -50,11 +48,9 @@ class TimeTracker:
             A method that stops the timer and calculates elapsed time
             
             :Example:
-            >>> start()
+            >>> stop()
         """
-
-        assert self.start is not None, "Timer has not been started."
-        
+        assert self.start_time is not None, "Timer has not been started."
         self.stop_time: float = time.perf_counter()
         self.calculate_elapsed_time()
 
@@ -69,7 +65,6 @@ class TimeTracker:
             :returns: The formatted elapsed time.
             :rtype: str
         """
-
         self.stop()
         self.elapsed_time_formatted: str = f"{int(self.hours):02}:{int(self.minutes):02}:{int(self.seconds):02}.{int(self.milliseconds):03}"
         return self.elapsed_time_formatted
