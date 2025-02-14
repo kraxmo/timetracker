@@ -23,21 +23,6 @@ class TimeTracker:
         self.stop_time = None
         self.elapsed_time = None
 
-    def stop(self) -> None:
-        """
-            A method that stops the timer and calculates elapsed time
-            
-            :Example:
-            >>> timer.stop()
-        """
-        assert self.start_time is not None, "Timer has not been started."
-        self.stop_time: float = time.perf_counter()
-        self.elapsed_time: float = self.stop_time - self.start_time
-        total_seconds: float = self.elapsed_time
-        self.hours, remainder = divmod(total_seconds, 3600)
-        self.minutes, self.seconds = divmod(remainder, 60)
-        self.milliseconds: float = (self.seconds - int(self.seconds)) * 1000
-
     def split(self) -> str:
         """
             A method that returns a formatted split time
@@ -52,6 +37,21 @@ class TimeTracker:
         self.stop()
         self.elapsed_time_formatted: str = f"{int(self.hours):02}:{int(self.minutes):02}:{int(self.seconds):02}.{int(self.milliseconds):03}"
         return self.elapsed_time_formatted
+
+    def stop(self) -> None:
+        """
+            A method that stops the timer and calculates elapsed time
+            
+            :Example:
+            >>> timer.stop()
+        """
+        assert self.start_time is not None, "Timer has not been started."
+        self.stop_time: float = time.perf_counter()
+        self.elapsed_time: float = self.stop_time - self.start_time
+        total_seconds: float = self.elapsed_time
+        self.hours, remainder = divmod(total_seconds, 3600)
+        self.minutes, self.seconds = divmod(remainder, 60)
+        self.milliseconds: float = (self.seconds - int(self.seconds)) * 1000
 
 if __name__ == "__main__":
     duration: int = 3
